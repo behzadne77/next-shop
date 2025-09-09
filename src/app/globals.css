@@ -1,10 +1,17 @@
 @import "tailwindcss";
-
+@theme {
+  --color-main-1: #e3e9ec;
+  --breakpoint-3xl: 120rem;
+}
+@utility container {
+  @apply mx-auto p-4;
+}
+@custom-variant dark (&:where(.dark, .dark *));
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
-
+@variable
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -20,7 +27,6 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  @apply !bg-[#F2F2F2] dark:bg-gray-900;
   font-family: Arial, Helvetica, sans-serif;
 }
