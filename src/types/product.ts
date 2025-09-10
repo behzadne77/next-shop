@@ -11,6 +11,10 @@ export type Product = {
   rating: number;
   stock: number;
   images: string[];
+  warrantyInformation: string;
+  shippingInformation: string;
+  returnPolicy: string;
+  reviews: Review[]
 };
 
 export type ProductsResponse = {
@@ -20,6 +24,10 @@ export type ProductsResponse = {
   limit: number;
 };
 
-
-
-
+export type Review = {
+  comment: string;
+  date: string;
+  rating: number;
+  reviewerEmail: string;
+  reviewerName: string;
+}

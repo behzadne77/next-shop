@@ -2,6 +2,7 @@
 import { Product } from "@/types/product";
 import { Badge, Button, Group, Text, Stack, Divider, Rating, ActionIcon } from "@mantine/core";
 import { ShoppingBag, Heart, Share2, Star, Package, Truck, Shield, RotateCcw } from "lucide-react";
+import ProductRanking from "./ProductRanking";
 
 interface ProductDetailsProps {
     product: Product;
@@ -86,7 +87,7 @@ export default function ProductDetails({ product, isLoading }: ProductDetailsPro
             {/* Description */}
             <div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">Description</h3>
-                <Text size="md" c="dimmed" className="leading-relaxed">
+                <Text size="sm" c="dimmed" className="leading-relaxed">
                     {product.description}
                 </Text>
             </div>
@@ -112,21 +113,21 @@ export default function ProductDetails({ product, isLoading }: ProductDetailsPro
                     <Truck className="h-5 w-5 text-indigo-600" />
                     <div>
                         <Text size="sm" fw={600}>Fast Delivery</Text>
-                        <Text size="xs" c="dimmed">2-3 business days</Text>
+                        <Text size="xs" c="dimmed">{product.shippingInformation}</Text>
                     </div>
                 </div>
                 <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl">
                     <Shield className="h-5 w-5 text-indigo-600" />
                     <div>
                         <Text size="sm" fw={600}>Warranty</Text>
-                        <Text size="xs" c="dimmed">1 year coverage</Text>
+                        <Text size="xs" c="dimmed">{product.warrantyInformation}</Text>
                     </div>
                 </div>
                 <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl">
                     <RotateCcw className="h-5 w-5 text-indigo-600" />
                     <div>
                         <Text size="sm" fw={600}>Returns</Text>
-                        <Text size="xs" c="dimmed">30 day return</Text>
+                        <Text size="xs" c="dimmed">{product.returnPolicy}</Text>
                     </div>
                 </div>
             </div>
@@ -182,6 +183,9 @@ export default function ProductDetails({ product, isLoading }: ProductDetailsPro
                     Buy Now
                 </Button>
             </div>
+
+            {/* Product Ranking */}
+            <ProductRanking product={product} />
 
             {/* Additional Info */}
             <Divider />
