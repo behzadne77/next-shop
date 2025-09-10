@@ -16,11 +16,10 @@ export default function ProductPage () {
     const [total, setTotal] = useState<number>(0)
     const totalPages = Math.max(1, Math.ceil(total / limit))
     useEffect(() => {
-        console.log("skip changed")
         const params = new URLSearchParams(searchParams)
         params.set("page", String(skip / limit + 1))
         router.push(`?${params.toString()}`, { scroll: false });
-    }, [skip])
+    }, [skip, router, searchParams])
     return (
         <section className="container">
             <LastProductsClient
