@@ -2,6 +2,7 @@ import { Card, Text, Badge, Button, Group, Stack, Rating, ActionIcon } from '@ma
 import { ShoppingBag, Heart } from 'lucide-react';
 import Link from "next/link"
 import type { Product } from "@/types/product";
+import Image from 'next/image';
 
 interface ProductsCardProps {
   product: Product;
@@ -22,6 +23,8 @@ export default function ProductsCard({ product }: ProductsCardProps) {
               src={product.thumbnail}
               alt={product.title}
               className="h-[200px] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.05]"
+              width={300}
+              height={300}
             />
           </div>
 

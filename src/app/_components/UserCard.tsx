@@ -1,19 +1,22 @@
 import { User } from "@/types/user";
+import Image from "next/image";
 
 interface userCardProps {
     user: User;
-    index: number
+    index?: number
 }
-export default function UserCard({ user, index: _index }: userCardProps) {
+export default function UserCard({ user }: userCardProps) {
     return (
         <section className="group relative overflow-hidden rounded-2xl bg-white/80 backdrop-blur ring-1 ring-gray-200 shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5">
             <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-gradient-to-br from-indigo-500/10 via-sky-400/10 to-cyan-300/10 blur-2xl"></div>
             <div className="relative z-[1] flex items-center gap-4 p-4">
                 <div className="relative h-12 w-12 shrink-0 rounded-full ring-2 ring-white shadow-md">
-                    <img
+                    <Image
                         src={user.image}
                         alt={user.firstName}
                         className="h-12 w-12 rounded-full object-cover"
+                        width={60}
+                        height={60}
                     />
                     <span className="absolute -bottom-0.5 -right-0.5 h-3.5 w-3.5 rounded-full border-2 border-white bg-emerald-500 shadow"></span>
                 </div>

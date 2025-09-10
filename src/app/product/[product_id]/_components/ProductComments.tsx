@@ -1,16 +1,7 @@
-import { Product, Review } from "@/types/product";
-import { Star, Calendar, User, ThumbsUp, Reply, MoreVertical } from "lucide-react";
-import { useState } from "react";
-
+import { Product } from "@/types/product";
+import { Star, Calendar, MoreVertical } from "lucide-react";
 interface ProductCommentsProps {
     product: Product;
-}
-
-interface CommentFormData {
-    name: string;
-    email: string;
-    rating: number;
-    comment: string;
 }
 
 export default function ProductComments({ product }: ProductCommentsProps) {

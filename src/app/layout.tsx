@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { Poppins, Roboto } from "next/font/google";
+import { Roboto } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
 import  {MantineProviderWrapper} from "@/components/mantine-provider";
 import { Header } from "@/components/header";
 import { QueryProvider } from "@/components/query-provider";

@@ -2,10 +2,10 @@ import { Post } from "@/types/post";
 import { Eye, ThumbsUp, ThumbsDown, ArrowUpRight } from "lucide-react";
 interface PostCardProps {
     post: Post;
-    index: number;
+    index?: number;
 }
 
-export default function PostCard({ post, index: _index }: PostCardProps) {
+export default function PostCard({ post }: PostCardProps) {
     return (
         <article className="group relative overflow-hidden rounded-2xl bg-white/80 backdrop-blur ring-1 ring-gray-200 shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5">
             {/* Background gradient decoration */}

@@ -1,7 +1,7 @@
 import { QueryClient, useQuery } from "@tanstack/react-query";
 import { getUsers } from "@/services/users";
 
-export function useUsers({ limit, skip }: { limit: number; skip: number }) {
+export function UseUsers({ limit, skip }: { limit: number; skip: number }) {
   return useQuery({
     queryKey: ["users", { limit, skip }],
     queryFn: () => getUsers({ limit, skip }),
@@ -18,5 +18,5 @@ export async function prefetchUsers({ limit, skip }: { limit: number; skip: numb
 }
 
 export function fetchUsers(limit: number, skip: number) {
-  return useUsers({ limit, skip });
+  return UseUsers({ limit, skip });
 }

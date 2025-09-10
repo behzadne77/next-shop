@@ -1,5 +1,6 @@
 "useClient"
-import { Product } from "@/types/product";
+import type { Product } from "@/types/product";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export default function ProductGallery({ isLoading, product } : {isLoading: boolean, product: Product}) {
@@ -10,7 +11,7 @@ export default function ProductGallery({ isLoading, product } : {isLoading: bool
     useEffect(()=> {
         if(product)
             setActiveImage(product.images[0])
-    }, [isLoading])
+    }, [isLoading, product])
     return (
         <section className="w-full">
             {isLoading && (
@@ -26,7 +27,7 @@ export default function ProductGallery({ isLoading, product } : {isLoading: bool
             {product && (
                 <>
                     <section className="w-full h-76 bg-gray-300 rounded-lg flex items-center justify-center">
-                        {activeImage && (<img src={activeImage} className="w-60" />)}
+                        {activeImage && (<Image src={activeImage} alt={product.title} className="w-60" width={500} height={500} />)}
                     </section>
                     <section className="mt-4 grid grid-cols-5 gap-4">
                         {product.images.map((image, index) => (
@@ -35,7 +36,7 @@ export default function ProductGallery({ isLoading, product } : {isLoading: bool
                             className={`w-20 h-20 bg-gray-300 rounded-lg flex items-center justify-center cursor-pointer ${image == activeImage ? 'border border-blue-500' : ''}`}
                             onClick={() => changeActiveImage(image)}
                             >
-                                <img src={image} className="w-16" />
+                                <Image src={image} width={160} height={160} alt="image" className="w-16" />
                             </button>
                         ))}
                     </section>

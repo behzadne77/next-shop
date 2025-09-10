@@ -1,7 +1,7 @@
 "use client";
 import { Product } from "@/types/product";
-import { Badge, Button, Group, Text, Stack, Divider, Rating, ActionIcon } from "@mantine/core";
-import { ShoppingBag, Heart, Share2, Star, Package, Truck, Shield, RotateCcw } from "lucide-react";
+import { Badge, Button, Group, Text, Divider, Rating, ActionIcon } from "@mantine/core";
+import { ShoppingBag, Heart, Share2, Package, Truck, Shield, RotateCcw } from "lucide-react";
 import ProductRanking from "./ProductRanking";
 
 interface ProductDetailsProps {

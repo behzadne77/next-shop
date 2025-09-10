@@ -5,7 +5,7 @@ import { PostResponse } from "@/types/post";
 import PostCard from "./PostCard";
 
 export default function LastPostsClient ({limit, skip}: {limit: number, skip: number}) {
-    const {isLoading, isError, data} = fetchPosts(limit, skip)
+    const {isLoading, data} = fetchPosts(limit, skip)
     const usersList = data as PostResponse
     return (
         <section>

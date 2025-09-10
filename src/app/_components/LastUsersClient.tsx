@@ -5,7 +5,7 @@ import {Loader} from "@mantine/core"
 import UserCard from "./UserCard";
 
 export default function LastUsersClient ({limit, skip}: {limit: number, skip: number}) {
-    const {isLoading, isError, data} = fetchUsers(limit, skip)
+    const {isLoading, data} = fetchUsers(limit, skip)
     const usersList = data as UsersResponse
     return (
         <section>
