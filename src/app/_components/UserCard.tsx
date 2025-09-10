@@ -1,4 +1,5 @@
 import { User } from "@/types/user";
+import { ArrowUp } from "lucide-react";
 import Image from "next/image";
 
 interface userCardProps {
@@ -10,11 +11,11 @@ export default function UserCard({ user }: userCardProps) {
         <section className="group relative overflow-hidden rounded-2xl bg-white/80 backdrop-blur ring-1 ring-gray-200 shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5">
             <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-gradient-to-br from-indigo-500/10 via-sky-400/10 to-cyan-300/10 blur-2xl"></div>
             <div className="relative z-[1] flex items-center gap-4 p-4">
-                <div className="relative h-12 w-12 shrink-0 rounded-full ring-2 ring-white shadow-md">
+                <div className="relative w-8 h-8 md:h-12 md:w-12 shrink-0 rounded-full ring-2 ring-white shadow-md">
                     <Image
                         src={user.image}
                         alt={user.firstName}
-                        className="h-12 w-12 rounded-full object-cover"
+                        className="w-8 h-8 md:h-12 md:w-12 rounded-full object-cover"
                         width={60}
                         height={60}
                     />
@@ -40,12 +41,10 @@ export default function UserCard({ user }: userCardProps) {
                 <div className="flex items-center">
                     <button
                         type="button"
-                        className="inline-flex h-9 items-center gap-2 rounded-xl border border-gray-200 bg-white px-3 text-sm text-gray-700 shadow-sm transition-colors hover:border-indigo-200 hover:text-indigo-600"
+                        className="inline-flex h-9 items-center gap-1 rounded-xl border border-gray-200 bg-white px-3 text-sm text-gray-700 shadow-sm transition-colors hover:border-indigo-200 hover:text-indigo-600 !p-2"
                     >
-                        <span>View</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
-                            <path fillRule="evenodd" d="M12.97 3.97a.75.75 0 011.06 0l6 6a.75.75 0 11-1.06 1.06L14.25 6.31V20a.75.75 0 01-1.5 0V6.31l-4.72 4.72a.75.75 0 11-1.06-1.06l6-6z" clipRule="evenodd" />
-                        </svg>
+                        <span className="text-xs md:text-sm">View</span>
+                        <ArrowUp size={14}/>
                     </button>
                 </div>
             </div>

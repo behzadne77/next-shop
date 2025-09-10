@@ -49,8 +49,8 @@ export default function LastProductsClient({ limit, skip, title, onTotalChange }
     return (
         <div>
             {title && (
-            <section className="flex items-center justify-between">
-                <Title order={2} mb="md">{title}</Title>
+            <section className="flex items-center justify-between mb-4">
+                <Title order={2}>{title}</Title>
                 <Link href="/product">
                     <Button
                         variant="light"

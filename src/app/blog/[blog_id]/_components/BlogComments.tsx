@@ -49,7 +49,7 @@ export default function BlogComments({ postId }: BlogCommentsProps) {
             </div>
             <Divider />
             {commentsList?.comments && (
-                <ul className="space-y-3 grid grid-cols-2 gap-4">
+                <ul className="space-y-3 grid md:grid-cols-2 gap-4">
                     {commentsList.comments.map((c) => {
                         const fullName = c.user.fullName?.trim() || 'Anonymous';
                         const [firstInitial = '', lastInitial = ''] = fullName.split(' ');

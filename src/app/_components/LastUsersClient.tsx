@@ -12,7 +12,7 @@ export default function LastUsersClient ({limit, skip}: {limit: number, skip: nu
             {isLoading && (
                 <Loader size={30} />
             )}
-            <section className="grid grid-cols-2 gap-6">
+            <section className="grid md:grid-cols-2 gap-6">
                 {usersList?.users && (
                     <>
                         {usersList.users.map((user, index)=> (

@@ -26,8 +26,8 @@ export default function LastPostsClient ({limit, skip, onTotalChange, showTitle 
     return (
         <section>
             {showTitle && (
-                <section className="flex items-center justify-between">
-                    <Title order={2} mb="md">Last Posts</Title>
+                <section className="flex items-center justify-between mb-4">
+                    <Title order={2}>Last Posts</Title>
                     <Link href="/blog">
                         <Button
                             variant="light"
@@ -45,7 +45,7 @@ export default function LastPostsClient ({limit, skip, onTotalChange, showTitle 
                     <Loader size={30} />
                 </section>
             )}
-            <section className="grid grid-cols-2 gap-6">
+            <section className="grid md:grid-cols-2 gap-6">
                 {postsList?.posts && (
                     <>
                         {postsList.posts.map((post, index)=> (

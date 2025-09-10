@@ -49,7 +49,7 @@ export default function PostCard({ post }: PostCardProps) {
                 )}
 
                 {/* Footer with reactions and actions */}
-                <div className="flex items-center justify-between">
+                <div className="md:flex items-center justify-between">
                     {/* Reactions */}
                     <div className="flex items-center gap-4">
                         <button className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm text-gray-600 transition-colors hover:bg-green-50 hover:text-green-600">
@@ -66,7 +66,7 @@ export default function PostCard({ post }: PostCardProps) {
                     <Link href={`/blog/${post.id}`}>
                         <button
                             type="button"
-                            className="inline-flex h-9 items-center gap-2 rounded-xl border border-gray-200 bg-white px-4 text-sm text-gray-700 shadow-sm transition-colors hover:border-indigo-200 hover:text-indigo-600"
+                            className="inline-flex h-9 items-center gap-2 rounded-xl border border-gray-200 bg-white px-4 text-sm text-gray-700 shadow-sm transition-colors hover:border-indigo-200 hover:text-indigo-600 mt-4 md:mt-0"
                         >
                             <span>Read More</span>
                             <ArrowUpRight className="h-4 w-4" />
