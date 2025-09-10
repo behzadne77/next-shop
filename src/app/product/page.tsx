@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import LastProductsClient from "../_components/LastProductsClient";
 import { Pagination } from "@mantine/core";
 import { useSearchParams, useRouter } from "next/navigation";
@@ -15,11 +15,21 @@ export default function ProductPage () {
     const [skip, setSkip] = useState<number>((currentPage - 1) * limit)
     const [total, setTotal] = useState<number>(0)
     const totalPages = Math.max(1, Math.ceil(total / limit))
+    const changeCurrentPage = useCallback((page: number)=> {
+        setSkip((page - 1) * limit)
+    }, [skip])
     useEffect(() => {
         const params = new URLSearchParams(searchParams)
         params.set("page", String(skip / limit + 1))
-        router.push(`?${params.toString()}`, { scroll: false });
-    }, [skip, router, searchParams])
+        if (!searchParams.get("page"))
+            router.replace(`?${params.toString()}`, { scroll: false });
+        else
+            router.push(`?${params.toString()}`, { scroll: false });
+    }, [skip, searchParams, router])
+    useEffect(()=> {
+        const pageFromUrl = Number(searchParams.get("page") || 1)
+        setSkip((pageFromUrl - 1) * limit)
+    }, [searchParams])
     return (
         <section className="container">
             <LastProductsClient
@@ -33,7 +43,7 @@ export default function ProductPage () {
                     <Pagination
                         total={totalPages}
                         value={Math.floor(skip / limit) + 1}
-                        onChange={(page) => setSkip((page - 1) * limit)}
+                        onChange={(page) => changeCurrentPage(page)}
                     />
                 </div>
             )}

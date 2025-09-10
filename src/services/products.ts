@@ -10,3 +10,4 @@ export async function showProduct(id:number) {
   return fetchJson<Product>(`/products/${id}`)
 }
 
+
