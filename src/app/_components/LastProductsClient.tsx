@@ -2,16 +2,26 @@
 import { fetchProducts } from "@/queries/use-products";
 import { ProductsResponse } from "@/types/product";
 import ProductsCard from "./ProductsCard";
-import { Grid, Skeleton, Alert, Title } from '@mantine/core';
+import { Grid, Skeleton, Alert, Title, Button } from '@mantine/core';
+import { ChevronRight } from 'lucide-react';
+import Link from "next/link";
+import { useEffect } from "react";
 
 interface LastProductsClientProps {
     limit: number;
     skip: number;
-    title: string;
+    title?: string;
+    onTotalChange?: (total: number) => void;
 }
-export default function LastProductsClient({ limit, skip, title }: LastProductsClientProps) {
+export default function LastProductsClient({ limit, skip, title, onTotalChange }: LastProductsClientProps) {
     const {data, isLoading, isError} = fetchProducts(limit, skip)
     const productsList = data as ProductsResponse
+    
+    useEffect(() => {
+        if (productsList?.total != null && onTotalChange) {
+            onTotalChange(productsList.total)
+        }
+    }, [productsList?.total, onTotalChange])
     
     if (isLoading) {
         return (
@@ -38,7 +48,21 @@ export default function LastProductsClient({ limit, skip, title }: LastProductsC
     
     return (
         <div>
-            <Title order={2} mb="md">{title}</Title>
+            {title && (
+            <section className="flex items-center justify-between">
+                <Title order={2} mb="md">{title}</Title>
+                <Link href="/product">
+                    <Button
+                        variant="light"
+                        size="sm"
+                        radius="xl"
+                        rightSection={<ChevronRight size={16} />}
+                    >
+                        See All
+                    </Button>
+                </Link>
+            </section>
+            )}
             <Grid>
                 {productsList?.products.map(product => (
                     <Grid.Col key={product.id} span={{ base: 12, sm: 6, md: 4 }}>

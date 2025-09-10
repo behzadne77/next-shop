@@ -19,7 +19,7 @@ export default function ProductsCard({ product }: ProductsCardProps) {
         <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-gradient-to-br from-indigo-500/10 via-sky-400/10 to-cyan-300/10 blur-2xl" />
         <Card.Section className="relative">
           <div className="relative overflow-hidden">
-            <img
+            <Image
               src={product.thumbnail}
               alt={product.title}
               className="h-[200px] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.05]"
