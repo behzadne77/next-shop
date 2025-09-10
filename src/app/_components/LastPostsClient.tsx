@@ -1,21 +1,54 @@
 "use client";
-import {Loader} from "@mantine/core"
+import {Button, Loader, Title} from "@mantine/core"
 import { fetchPosts } from "@/queries/use-posts";
 import { PostResponse } from "@/types/post";
 import PostCard from "./PostCard";
+import { useEffect } from "react";
+import { ChevronRight } from "lucide-react";
+import Link from "next/link";
 
-export default function LastPostsClient ({limit, skip}: {limit: number, skip: number}) {
+interface LastPostsClientProps {
+    limit: number;
+    skip: number;
+    onTotalChange?: (total: number) => void;
+    showTitle?: boolean
+}
+
+export default function LastPostsClient ({limit, skip, onTotalChange, showTitle = true}: LastPostsClientProps) {
     const {isLoading, data} = fetchPosts(limit, skip)
-    const usersList = data as PostResponse
+    const postsList = data as PostResponse
+    useEffect(() => {
+        if (postsList?.total != null && onTotalChange) {
+            onTotalChange(postsList.total)
+        }
+    }, [postsList?.total, onTotalChange])
+    
     return (
         <section>
+            {showTitle && (
+                <section className="flex items-center justify-between">
+                    <Title order={2} mb="md">Last Posts</Title>
+                    <Link href="/blog">
+                        <Button
+                            variant="light"
+                            size="sm"
+                            radius="xl"
+                            rightSection={<ChevronRight size={16} />}
+                        >
+                            See All
+                        </Button>
+                    </Link>
+                </section>
+            )}
             {isLoading && (
-                <Loader size={30} />
+                <section className="flex items-center justify-center">
+                    <Loader size={30} />
+                </section>
             )}
             <section className="grid grid-cols-2 gap-6">
-                {usersList?.posts && (
+                {postsList?.posts && (
                     <>
-                        {usersList.posts.map((post, index)=> (
+                        {postsList.posts.map((post, index)=> (
                             <PostCard key={post.id} post={post} index={index} />
                         ))}
                     </>

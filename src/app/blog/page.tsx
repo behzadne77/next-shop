@@ -1,0 +1,52 @@
+"use client";
+import { useCallback, useEffect, useState } from "react";
+import LastPostsClient from "../_components/LastPostsClient";
+import { Pagination } from "@mantine/core";
+import { useSearchParams, useRouter } from "next/navigation";
+
+export default function ProductPage () {
+    // ----- last page from url ----------
+    const searchParams = useSearchParams()
+    const router = useRouter()
+    const pageFromUrl = Number(searchParams.get("page") ?? "1");
+    const currentPage = Number.isFinite(pageFromUrl) && pageFromUrl > 0 ? pageFromUrl : 1;
+    // ------- pagination data ------------
+    const limit = 12
+    const [skip, setSkip] = useState<number>((currentPage - 1) * limit)
+    const [total, setTotal] = useState<number>(0)
+    const totalPages = Math.max(1, Math.ceil(total / limit))
+    const changeCurrentPage = useCallback((page: number)=> {
+        setSkip((page - 1) * limit)
+    }, [skip])
+    useEffect(() => {
+        const params = new URLSearchParams(searchParams)
+        params.set("page", String(skip / limit + 1))
+        if (!searchParams.get("page"))
+            router.replace(`?${params.toString()}`, { scroll: false });
+        else
+            router.push(`?${params.toString()}`, { scroll: false });
+    }, [skip, searchParams, router])
+    useEffect(()=> {
+        const pageFromUrl = Number(searchParams.get("page") || 1)
+        setSkip((pageFromUrl - 1) * limit)
+    }, [searchParams])
+    return (
+        <section className="container">
+            <LastPostsClient
+                limit={limit}
+                skip={skip}
+                onTotalChange={setTotal}
+                showTitle={false}
+            />
+            {total > 0 && (
+                <div className="mt-6 flex justify-center">
+                    <Pagination
+                        total={totalPages}
+                        value={Math.floor(skip / limit) + 1}
+                        onChange={(page) => changeCurrentPage(page)}
+                    />
+                </div>
+            )}
+        </section>
+    )
+}
