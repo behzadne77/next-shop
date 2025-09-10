@@ -16,3 +16,22 @@ export type PostResponse = {
     skip: number;
     total: number;
 }
+
+export type PostComment = {
+    id: number;
+    body: string;
+    postId: number;
+    likes: number;
+    user: {
+        id: number;
+        fullName: string;
+        userName: string;
+    }
+}
+
+export type PostCommentResponse = {
+    comments: PostComment[];
+    total: number;
+    skip: number;
+    limit: number;
+}

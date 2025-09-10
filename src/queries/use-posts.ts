@@ -1,5 +1,5 @@
 import { QueryClient, useQuery } from "@tanstack/react-query";
-import { getPosts } from "@/services/posts";
+import { getPostComments, getPosts, showPost } from "@/services/posts";
 
 export function UsePosts({ limit, skip }: { limit: number; skip: number }) {
   return useQuery({
@@ -20,3 +20,20 @@ export async function prefetchPosts({ limit, skip }: { limit: number; skip: numb
 export function fetchPosts(limit: number, skip: number) {
   return UsePosts({ limit, skip });
 }
+
+export function FetchPost(id: number) {
+  return useQuery({
+    retry: 1,
+    queryFn: () => showPost(id),
+    queryKey: ["post", { id }]
+  })
+}
+
+export function FetchPostComments(id: number) {
+  return useQuery({
+    retry: 1,
+    queryFn: () => getPostComments(id),
+    queryKey: ["post_comment", { id }]
+  })
+}
+

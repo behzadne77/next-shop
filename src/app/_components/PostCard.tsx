@@ -1,5 +1,6 @@
 import { Post } from "@/types/post";
 import { Eye, ThumbsUp, ThumbsDown, ArrowUpRight } from "lucide-react";
+import Link from "next/link"
 interface PostCardProps {
     post: Post;
     index?: number;
@@ -62,13 +63,15 @@ export default function PostCard({ post }: PostCardProps) {
                     </div>
 
                     {/* Action button */}
-                    <button
-                        type="button"
-                        className="inline-flex h-9 items-center gap-2 rounded-xl border border-gray-200 bg-white px-4 text-sm text-gray-700 shadow-sm transition-colors hover:border-indigo-200 hover:text-indigo-600"
-                    >
-                        <span>Read More</span>
-                        <ArrowUpRight className="h-4 w-4" />
-                    </button>
+                    <Link href={`/blog/${post.id}`}>
+                        <button
+                            type="button"
+                            className="inline-flex h-9 items-center gap-2 rounded-xl border border-gray-200 bg-white px-4 text-sm text-gray-700 shadow-sm transition-colors hover:border-indigo-200 hover:text-indigo-600"
+                        >
+                            <span>Read More</span>
+                            <ArrowUpRight className="h-4 w-4" />
+                        </button>
+                    </Link>
                 </div>
             </div>
         </article>

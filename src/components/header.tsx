@@ -7,12 +7,12 @@ export function Header() {
     
     const links = [
         {
-            title: "Features",
-            link: '/features'
+            title: "Products",
+            link: '/product'
         },
         {
-            title: "Pricing",
-            link: '/pricing'
+            title: "Posts",
+            link: '/blog'
         },
         {
             title: "Docs",
