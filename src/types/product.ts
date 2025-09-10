@@ -10,6 +10,7 @@ export type Product = {
   thumbnail: string;
   rating: number;
   stock: number;
+  images: string[];
 };
 
 export type ProductsResponse = {

@@ -27,6 +27,24 @@
 }
 
 body {
-  @apply !bg-[#F2F2F2] dark:bg-gray-900;
+  /* Premium soft gradient background */
+  background-color: #f3f5f9;
+  background-image:
+    radial-gradient(1200px 600px at -10% -20%, rgba(99, 102, 241, 0.10), transparent 60%),
+    radial-gradient(800px 400px at 110% -10%, rgba(34, 211, 238, 0.10), transparent 60%),
+    radial-gradient(600px 300px at 50% 120%, rgba(14, 165, 233, 0.08), transparent 60%),
+    linear-gradient(180deg, #f7f8fb 0%, #eef2f6 100%);
+  background-attachment: fixed, fixed, fixed, fixed;
+  background-size: cover, cover, cover, cover;
+  background-repeat: no-repeat;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.dark body {
+  background-color: #0b1020;
+  background-image:
+    radial-gradient(1200px 600px at -10% -20%, rgba(99, 102, 241, 0.15), transparent 60%),
+    radial-gradient(800px 400px at 110% -10%, rgba(34, 211, 238, 0.12), transparent 60%),
+    radial-gradient(600px 300px at 50% 120%, rgba(14, 165, 233, 0.10), transparent 60%),
+    linear-gradient(180deg, #0b1020 0%, #0a0f1a 100%);
 }

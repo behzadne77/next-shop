@@ -1,5 +1,5 @@
 import { QueryClient, useQuery } from "@tanstack/react-query";
-import { getProducts } from "@/services/products";
+import { getProducts, showProduct } from "@/services/products";
 import type { ProductsResponse } from "@/types/product";
 
 export function useProducts({ limit, skip }: { limit: number; skip: number }) {
@@ -20,4 +20,12 @@ export async function prefetchProducts({ limit, skip }: { limit: number; skip: n
 
 export function fetchProducts(limit: number, skip: number) {
   return useProducts({ limit, skip });
+}
+
+export function fetchProduct(id: number) {
+  return useQuery({
+    retry: 1,
+    queryFn: () => showProduct(id),
+    queryKey: ["product", {id}]
+  })
 }
