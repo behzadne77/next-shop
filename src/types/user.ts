@@ -21,5 +21,15 @@ export type LoginResponse = {
         lastName: string;
         gender: "female" | "male";
         image: "string";
+        id: number
     }
+}
+export type LoginUser = {
+    id: number;
+    username: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    gender: "female" | "male";
+    image: "string";
 }

@@ -1,5 +1,5 @@
-import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
-import { getUsers, login } from "@/services/users";
+import { QueryClient, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { fetchMe, getUsers, login } from "@/services/users";
 import { LoginFormData } from "@/validation/login";
 
 export function UseUsers({ limit, skip }: { limit: number; skip: number }) {
@@ -27,4 +27,18 @@ export function useLoginMutation() {
     mutationKey: ["login"],
     mutationFn: (values: LoginFormData) => login(values),
   });
+}
+
+export function useMe() {
+  return useQuery({
+    queryKey: ["me"],
+    queryFn: () => fetchMe(),
+    staleTime: 0,
+    refetchOnWindowFocus: false
+  })
+}
+
+export function useAuthInvalidate() {
+  const qc = useQueryClient();
+  return () => qc.invalidateQueries({ queryKey: ["me"] });
 }

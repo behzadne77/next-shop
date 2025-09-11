@@ -19,10 +19,14 @@ import {
 import { AlertCircle, LogIn } from 'lucide-react';
 import { useLoginMutation } from '@/queries/use-users';
 import { LoginResponse } from '@/types/user';
+import { useAuthInvalidate } from "@/queries/use-users";
+import { useRouter } from 'next/navigation';
 
 
 export default function LoginForm() {
   const [error, setError] = useState<string | null>(null);
+  const invalidateAuth = useAuthInvalidate()
+  const router = useRouter()
 
   const form = useForm<LoginFormData>({
     mode: 'uncontrolled',
@@ -39,7 +43,8 @@ export default function LoginForm() {
     setError(null);
     try {
       const data: LoginResponse = await loginMutation.mutateAsync(values);
-      
+      await invalidateAuth()
+      router.push('/dashboard')
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     }

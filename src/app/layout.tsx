@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
 import  {MantineProviderWrapper} from "@/components/mantine-provider";
-import { Header } from "@/components/header";
 import { QueryProvider } from "@/components/query-provider";
 import { ConditionalHeader } from "../components/conditional-header";
 const roboto = Roboto({
@@ -23,10 +22,10 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${roboto.className} antialiased`}>
         <QueryProvider>
-          <MantineProviderWrapper>
-            <ConditionalHeader />
-            {children}
-          </MantineProviderWrapper>
+            <MantineProviderWrapper>
+              <ConditionalHeader />
+              {children}
+            </MantineProviderWrapper>
         </QueryProvider>
       </body>
     </html>

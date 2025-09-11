@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Button, Drawer, Divider } from '@mantine/core';
 import { User2, Menu } from "lucide-react";
 import { useDisclosure } from '@mantine/hooks';
+import HeaderUser from "./header-user";
 
 export function Header() {
     const [opened, { open, close }] = useDisclosure(false)
@@ -46,9 +47,7 @@ export function Header() {
             <button className="sm:hidden inline-flex items-center justify-center rounded-xl p-2 text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-white/10 transition-colors" onClick={open} aria-label="Open menu">
               <Menu size={20} />
             </button>
-            <Button component={Link} href="/login" variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }} radius="xl" leftSection={<User2 size={18} />} className="!hidden md:!block">
-              Log in
-            </Button>
+            <HeaderUser />
           </div>
         </div>
       </div>
