@@ -2,7 +2,7 @@
 import { cookies } from "next/headers";
 
 export async function POST() {
-  const jar = cookies();
+  const jar = await cookies();
 
   // پاک‌کردن با maxAge=0 یا set بر مقدار خالی
   jar.set("access_token", "", { httpOnly: true, path: "/", maxAge: 0 });

@@ -19,7 +19,7 @@ export async function POST(req: Request) {
     const { accessToken, refreshToken, firstName, gender, id, image, lastName, username } = await backendRes.json();
     const user = {firstName, gender, id, image, lastName, username}
     // ست کردن کوکی‌های HttpOnly
-    const jar = cookies();
+    const jar = await cookies();
     const isProd = process.env.NODE_ENV === "production";
 
     jar.set("access_token", accessToken, {
