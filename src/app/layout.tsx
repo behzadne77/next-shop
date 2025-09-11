@@ -4,6 +4,7 @@ import "./globals.css";
 import  {MantineProviderWrapper} from "@/components/mantine-provider";
 import { Header } from "@/components/header";
 import { QueryProvider } from "@/components/query-provider";
+import { ConditionalHeader } from "../components/conditional-header";
 const roboto = Roboto({
   subsets: ['latin']
 })
@@ -23,7 +24,7 @@ export default function RootLayout({
       <body className={`${roboto.className} antialiased`}>
         <QueryProvider>
           <MantineProviderWrapper>
-            <Header />
+            <ConditionalHeader />
             {children}
           </MantineProviderWrapper>
         </QueryProvider>

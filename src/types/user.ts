@@ -12,3 +12,14 @@ export type UsersResponse = {
     skip: number;
     limit: number;
 }
+
+export type LoginResponse = {
+    username: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    gender: "female" | "male";
+    image: "string";
+    accessToken: string;
+    refreshToken: string;
+}
