@@ -1,7 +1,10 @@
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "https://dummyjson.com";
 
 export async function fetchJson<T>(path: string, init?: RequestInit): Promise<T> {
-  const url = path.startsWith("http") ? path : `${BASE_URL}${path}`;
+  const isInternalApi = path.startsWith("/api/");
+  const url = isInternalApi 
+  ? path 
+  : (path.startsWith("http") ? path : `${BASE_URL}${path}`);
   const res = await fetch(url, {
     ...init,
     headers: {

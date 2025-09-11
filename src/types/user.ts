@@ -14,12 +14,12 @@ export type UsersResponse = {
 }
 
 export type LoginResponse = {
-    username: string;
-    email: string;
-    firstName: string;
-    lastName: string;
-    gender: "female" | "male";
-    image: "string";
-    accessToken: string;
-    refreshToken: string;
+    user: {
+        username: string;
+        email: string;
+        firstName: string;
+        lastName: string;
+        gender: "female" | "male";
+        image: "string";
+    }
 }

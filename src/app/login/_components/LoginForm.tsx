@@ -18,6 +18,7 @@ import {
 } from '@mantine/core';
 import { AlertCircle, LogIn } from 'lucide-react';
 import { useLoginMutation } from '@/queries/use-users';
+import { LoginResponse } from '@/types/user';
 
 
 export default function LoginForm() {
@@ -37,8 +38,8 @@ export default function LoginForm() {
   const handleSubmit = async (values: LoginFormData) => {
     setError(null);
     try {
-      const data = await loginMutation.mutateAsync(values);
-      console.log('Login success:', data);
+      const data: LoginResponse = await loginMutation.mutateAsync(values);
+      
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     }

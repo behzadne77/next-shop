@@ -9,7 +9,7 @@ export async function getUsers(params: { limit: number; skip: number }) {
 }
 
 export async function login(params:LoginFormData) {
-  return fetchJson<LoginResponse>(`/auth/login`, {
+  return fetchJson<LoginResponse>(`/api/auth/login`, {
     method: "post",
     body: JSON.stringify(params)
   })
