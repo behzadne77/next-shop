@@ -44,7 +44,7 @@ export default function LoginForm() {
     try {
       const data: LoginResponse = await loginMutation.mutateAsync(values);
       await invalidateAuth()
-      router.push('/dashboard')
+      await router.push('/panel/dashboard')
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     }

@@ -20,3 +20,9 @@ export async function fetchMe() {
     cache: "no-store"
   })
 }
+
+export async function logout() {
+  return fetchJson(`/api/auth/logout`, {
+    method: "post"
+  })
+}

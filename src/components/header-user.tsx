@@ -10,6 +10,7 @@ import {
   Divider,
   Group,
   Indicator,
+  Loader,
   Menu,
   Stack,
   Text,
@@ -18,14 +19,17 @@ import {
 } from "@mantine/core";
 import { ChevronDown, LogOut, Settings, User, LayoutDashboard, Package, User2 } from "lucide-react";
 import { useAuthStore } from "@/store/auth-store";
-import { useAuthInvalidate } from "@/queries/use-users";
+import { useLogout } from "@/queries/use-users";
 import { useMediaQuery } from "@mantine/hooks";
+import { useRouter } from "next/navigation";
 
 export default function HeaderUser() {
-  const { user, status, reset } = useAuthStore();
-  const invalidateAuth = useAuthInvalidate();
+  const { user, status } = useAuthStore();
   const isMobile = useMediaQuery("(max-width: 640px)"); // <sm
   const [opened, setOpened] = useState(false);
+  // ----- logout ------
+  const router = useRouter()
+  const {mutate: logout, isPending} = useLogout()
 
   if (status === "idle") {
     return (
@@ -35,7 +39,7 @@ export default function HeaderUser() {
 
   if (!user) {
     return (
-        <Button component={Link} href="/login" variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }} radius="xl" leftSection={<User2 size={18} />} className="!hidden md:!block">
+        <Button component={Link} href="/login" variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }} radius="xl" leftSection={<User2 size={18} />} className="md:block">
             Log in
         </Button>
     );
@@ -47,12 +51,8 @@ export default function HeaderUser() {
     "U";
 
   async function handleLogout() {
-    try {
-      await fetch("/api/auth/logout", { method: "POST" });
-    } finally {
-      reset();
-      await invalidateAuth();
-    }
+    await logout()
+    router.push("/")
   }
 
   return (
@@ -125,7 +125,7 @@ export default function HeaderUser() {
         <Menu.Item
           leftSection={<LayoutDashboard size={16} />}
           component={Link}
-          href="/dashboard"
+          href="/panel/dashboard"
         >
           Dashboard
         </Menu.Item>
@@ -160,8 +160,12 @@ export default function HeaderUser() {
           color="red"
           leftSection={<LogOut size={16} />}
           onClick={handleLogout}
+          disabled={isPending}
         >
           Logout
+          {isPending && (
+            <Loader size={14} className="ml-2 pt-1" color="red" />
+          )}
         </Menu.Item>
       </Menu.Dropdown>
     </Menu>

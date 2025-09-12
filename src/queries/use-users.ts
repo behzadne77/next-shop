@@ -1,7 +1,8 @@
 import { QueryClient, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { fetchMe, getUsers, login } from "@/services/users";
+import { fetchMe, getUsers, login, logout } from "@/services/users";
 import { LoginFormData } from "@/validation/login";
 import { LoginUser } from "@/types/user";
+import { useAuthStore } from "@/store/auth-store";
 
 export function UseUsers({ limit, skip }: { limit: number; skip: number }) {
   return useQuery({
@@ -56,4 +57,20 @@ export function useMe() {
 export function useAuthInvalidate() {
   const qc = useQueryClient();
   return () => qc.invalidateQueries({ queryKey: ["me"] });
+}
+
+export function useLogout() {
+  const qc = useQueryClient();
+  const {reset} = useAuthStore()
+  return useMutation({
+    mutationKey: ["logout"],
+    mutationFn: async () => {
+      const res = await logout()
+      if (!res.ok) throw new Error("Logout failed")
+    },
+    onSettled: async () => {
+      reset()
+      await qc.invalidateQueries({ queryKey: ["me"] })
+    }
+  })
 }
