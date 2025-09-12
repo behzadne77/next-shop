@@ -21,7 +21,7 @@ export async function fetchMe() {
   })
 }
 
-export async function logout() {
+export async function logout(): Promise<void> {
   return fetchJson(`/api/auth/logout`, {
     method: "post"
   })

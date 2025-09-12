@@ -38,7 +38,6 @@ export function useMe() {
       try {
         return await fetchMe();
       } catch(e: any) {
-        console.log("e", e)
         if (e?.name === "HttpError" && e.status === 401) {
           return null as LoginUser | null;
         }
@@ -65,8 +64,7 @@ export function useLogout() {
   return useMutation({
     mutationKey: ["logout"],
     mutationFn: async () => {
-      const res = await logout()
-      if (!res.ok) throw new Error("Logout failed")
+      await logout()
     },
     onSettled: async () => {
       reset()
