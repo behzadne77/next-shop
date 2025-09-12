@@ -1,7 +1,9 @@
 export default function DashboardPage () {
     return (
         <>
-            Dashboard page ...
+            <section className="container">
+                Dashboard page ...
+            </section>
         </>
     )
 }
