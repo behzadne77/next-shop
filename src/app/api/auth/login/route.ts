@@ -40,6 +40,9 @@ export async function POST(req: Request) {
 
     return Response.json({ user });
   } catch (err) {
-    return new Response("Server error", { status: 500 });
+    return new Response(JSON.stringify({
+      "message": "Server Error",
+      err
+    }), { status: 500 });
   }
 }
