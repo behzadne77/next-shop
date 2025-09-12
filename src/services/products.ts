@@ -9,11 +9,3 @@ export async function getProducts(params: { limit: number; skip: number }) {
 export async function showProduct(id:number) {
   return fetchJson<Product>(`/products/${id}`)
 }
-
-
-
-
-
-
-
-
