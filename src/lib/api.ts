@@ -1,5 +1,3 @@
-import { getRefreshToken } from "@/services/users";
-
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "https://dummyjson.com";
 class HttpError extends Error {
   constructor(public status: number, message: string) {
