@@ -18,13 +18,15 @@ function StatCard({ title, value, change, changeTone, Icon }: { title: string; v
     );
 }
 
-export default function StatsCards() {
+export default function StatsCards(props: {
+    totals: { users: number; posts: number; products: number; conversionRate?: string };
+}) {
+    const { totals } = props;
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-            <StatCard title="Total Users" value="12,345" change="+2.1% vs last week" changeTone="up" Icon={Users} />
-            <StatCard title="New Posts" value="234" change="+0.8% today" changeTone="up" Icon={FileText} />
-            <StatCard title="Active Products" value="1,028" change="-1.2% this month" changeTone="down" Icon={Package} />
-            <StatCard title="Conversion Rate" value="3.7%" change="+0.3% vs yesterday" changeTone="up" Icon={TrendingUp} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+            <StatCard title="Total Users" value={totals.users.toLocaleString("en")} change="+2.1% vs last week" changeTone="up" Icon={Users} />
+            <StatCard title="Total Posts" value={totals.posts.toLocaleString("en")} change="+0.8% today" changeTone="up" Icon={FileText} />
+            <StatCard title="Total Products" value={totals.products.toLocaleString("en")} change="-1.2% this month" changeTone="down" Icon={Package} />
         </div>
     );
 }

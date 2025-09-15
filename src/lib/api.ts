@@ -34,7 +34,10 @@ async function refreshTokensOnce(): Promise<boolean> {
   return refreshInFlight;
 }
 
-export async function fetchJson<T>(path: string, init?: RequestInit): Promise<T> {
+export async function fetchJson<T>(
+  path: string,
+  init?: RequestInit & { next?: { revalidate?: number; tags?: string[] } }
+): Promise<T> {
   const isInternalApi = path.startsWith("/api/");
   const url = isInternalApi 
   ? path 
@@ -47,26 +50,34 @@ export async function fetchJson<T>(path: string, init?: RequestInit): Promise<T>
         "Content-Type": "application/json",
         ...(init?.headers || {}),
       },
-      cache: "no-store",
+      cache: init?.cache ?? "no-store",
+      // next is supported in Next.js server runtime; cast to any to avoid client typing
+      ...(init?.next ? ({ next: init.next } as any) : {}),
     });
   }
+  try {
 
-  let res = await doFetch(url);
+    let res = await doFetch(url);
 
-  if (!res.ok && res.status === 401 && isInternalApi && !sessionRefreshDisabled) {
-    console.log("go for refresh token")
-    const refreshed = await refreshTokensOnce();
-    console.log("refresh token result is", refreshed)
-    if (refreshed) {
-      res = await doFetch(url);
+    if (!res.ok && res.status === 401 && isInternalApi && !sessionRefreshDisabled) {
+      console.log("go for refresh token")
+      const refreshed = await refreshTokensOnce();
+      console.log("refresh token result is", refreshed)
+      if (refreshed) {
+        res = await doFetch(url);
+      }
     }
+  
+    if (!res.ok) {
+      const text = await res.text().catch(() => "");
+      throw new HttpError(res.status, `HTTP ${res.status}: ${text}`);
+    }
+    return res.json() as Promise<T>;
   }
-
-  if (!res.ok) {
-    const text = await res.text().catch(() => "");
-    throw new HttpError(res.status, `HTTP ${res.status}: ${text}`);
+  catch(e) {
+    console.log("fetch failed", e)
+    throw e;
   }
-  return res.json() as Promise<T>;
 }
 
 

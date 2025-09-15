@@ -29,7 +29,6 @@ export async function middleware(req: NextRequest) {
     if (accessToken) {
       return NextResponse.next();
     }
-
     // Try a one-time refresh by calling internal API with current cookies
     try {
       const refreshUrl = new URL("/api/auth/refresh", origin);
@@ -38,12 +37,19 @@ export async function middleware(req: NextRequest) {
         headers: { cookie: req.headers.get("cookie") ?? "" },
         cache: "no-store",
       });
+      console.log("refresh url", refreshRes.ok)
 
       if (refreshRes.ok) {
-        // After refresh, redirect back to the same URL so the browser includes new cookies
-        return NextResponse.redirect(nextUrl);
+        const res = NextResponse.next();
+        const setCookie = refreshRes.headers.get("set-cookie");
+        if (setCookie) {
+          res.headers.set("set-cookie", setCookie);
+        }
+        return res; // بدون redirect
       }
-    } catch {}
+    } catch {
+      console.log("in catch")
+    }
 
     // Refresh failed: redirect to login with next param
     const loginUrl = new URL("/login", origin);
