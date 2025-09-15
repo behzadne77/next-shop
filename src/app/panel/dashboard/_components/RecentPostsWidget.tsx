@@ -6,7 +6,6 @@ interface Props {
 }
 
 export default function RecentPostsWidget({posts}: Props) {
-    console.log("posts", posts)
     return (
         <div className="rounded-2xl bg-gradient-to-br from-white to-zinc-50 dark:from-zinc-900 dark:to-zinc-950 shadow-sm p-5">
             <div className="mb-3 font-semibold">Recent Posts</div>

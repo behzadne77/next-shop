@@ -28,7 +28,7 @@ export function Header() {
     <header className="sticky top-1 z-40 w-full container mt-4">
       <div className="relative overflow-hidden rounded-2xl bg-white/70 dark:bg-white/5 backdrop-blur ring-1 ring-gray-200/70 dark:ring-white/10 shadow-sm">
         <div className="pointer-events-none absolute -right-20 -top-20 h-40 w-40 rounded-full bg-gradient-to-br from-indigo-500/10 via-sky-400/10 to-cyan-300/10 blur-2xl" />
-        <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
+        <div className="mx-auto px-4 h-14 flex items-center justify-between">
           <div className="flex items-center gap-1 md:gap-6">
             <button className="sm:hidden inline-flex items-center justify-center rounded-xl p-2 text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-white/10 transition-colors" onClick={open} aria-label="Open menu">
               <Menu size={20} />
