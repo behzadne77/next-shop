@@ -5,6 +5,8 @@ import RecentProductsWidget from "./_components/RecentProductsWidget";
 import { getUsers } from "@/services/users";
 import { getPosts } from "@/services/posts";
 import { getProducts } from "@/services/products";
+import RecentTodoWidget from "./_components/RecentTodoWidget";
+import { Suspense } from "react";
 
 export const revalidate = 900; // 15 minutes
 
@@ -33,6 +35,9 @@ export default async function DashboardPage () {
                     </div>
                     <div className="space-y-6">
                         <RecentUsersWidget users={usersResponse.users} />
+                        <Suspense fallback={<div>TODO's is loading ...</div>}>
+                            <RecentTodoWidget />
+                        </Suspense>
                     </div>
                 </div>
             </section>

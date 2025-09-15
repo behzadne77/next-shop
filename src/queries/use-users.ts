@@ -4,10 +4,10 @@ import { LoginFormData } from "@/validation/login";
 import { LoginUser } from "@/types/user";
 import { useAuthStore } from "@/store/auth-store";
 
-export function UseUsers({ limit, skip }: { limit: number; skip: number }) {
+export function UseUsers({ limit, skip, revalidateSeconds }: { limit: number; skip: number; revalidateSeconds?:number }) {
   return useQuery({
     queryKey: ["users", { limit, skip }],
-    queryFn: () => getUsers({ limit, skip }),
+    queryFn: () => getUsers({ limit, skip }, revalidateSeconds),
     retry: 1
   });
 }
