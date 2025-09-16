@@ -2,8 +2,9 @@
 import { useUserTodos } from "@/queries/use-todos";
 import { useAuthStore } from "@/store/auth-store";
 import { TodoResponse } from "@/types/todo";
-import { Loader } from "@mantine/core";
+import { Button, Loader } from "@mantine/core";
 import { ToggleLeft, ToggleRight } from "lucide-react";
+import Link from "next/link";
 
 export default function RecentTodoWidget() {
     const {user, status} = useAuthStore();
@@ -57,7 +58,14 @@ export default function RecentTodoWidget() {
                     </li>
                 ))}
                 {todos && todos.todos.length === 0 && !isLoading && (
-                    <li className="text-center text-red-500 py-4">There is no TODO Here</li>
+                    <section className="space-y-3">
+                        <li className="text-center text-blue-500 py-4">There is no TODO Here</li>
+                        <section className="flex justify-center">
+                            <Link href={"/panel/todo/create"}>
+                                <Button variant="light">Create New Item</Button>
+                            </Link>
+                        </section>
+                    </section>
                 )}
             </ul>
         </div>
